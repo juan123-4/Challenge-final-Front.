@@ -1,0 +1,52 @@
+.navList{
+    background-image: url("https://i.pinimg.com/736x/f6/9f/72/f69f7267a7595a2f8f2b5c9cdff0e807.jpg");
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content:center;
+    align-items: center;
+    display: flex;}
+    
+a img{
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    border-radius: 90%;}
+
+.Home img{
+    border-radius: 90%;
+    border: solid 3px red;
+    margin: 10px;}
+
+.country img{
+    border-radius: 90%;
+    border: solid 3px green;
+    margin: 10px;}
+
+.team img{
+    border-radius: 90%;
+    border: solid 3px yellow;
+    margin: 10px;}
+
+.favoritos img{
+    border-radius: 90%;
+    border: solid 3px orange;
+    margin-right:400px;
+    margin-left: 10px;
+    margin-bottom: 8px;}
+
+.buscar img{
+    margin-left: 400px;
+    margin-right: 10px;
+    margin-bottom: 8px;
+    border: solid 3px red;
+}
+.login img {
+   border: solid 3px yellow;
+   margin: 10px;}
+
+.register img{
+   margin: 10px;
+   border: solid 3px orange;} 
