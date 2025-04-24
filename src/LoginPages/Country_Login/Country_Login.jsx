@@ -1,37 +1,44 @@
-import React, { useState, useEffect,useRef } from "react";
-import Header from "../Header/Header";
+import React, { useState, useEffect,useRef} from "react";
+import styles from "./Country_Login.module.css";
 import { useFavoritos } from '../../Context/Favoritos/FavoritosContext';
-import styles from "./search.module.css";
+import VentanaPlayer from "../../LoginPages/Ventana/Ventana";
+import { useNavigate } from "react-router-dom";
+import HeaderLogin from "../HeaderLogin/HeaderLogin";
 
-const Search = () => {
 
+
+const Country_Login = () => {
   const { favorites, toggleFavorite } = useFavoritos();
-  const [name, setName] = useState("");
+  const [country, setCountry] = useState("");
   const [Players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
   const inputRef=useRef(null)
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-      inputRef.current?.focus();
-    }, []); 
-    
+    inputRef.current?.focus();
+  }, []); 
+  
+ 
   useEffect(() => {
-    if (name.trim() === "") {
+    if (country.trim() === "") {
       setPlayers([]);
       return;
     }
+   
 
     const delay = setTimeout(() => {
       buscarJugadores();
     }, 500);
 
     return () => clearTimeout(delay);
-  }, [name]);
+  }, [country]);
 
   const buscarJugadores = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3009/player/${name}`);
+      const response = await fetch(`http://localhost:3009/player/country/${country}`);
       if (!response.ok) {
         setPlayers([]);
         setLoading(false);
@@ -40,28 +47,28 @@ const Search = () => {
       const data = await response.json();
       setPlayers(data);
     } catch (error) {
-      console.error("Error buscando jugador:", error);
+      console.error("Error buscando el pais:", error);
       setPlayers([]);
     }
     setLoading(false);
   };
 
   const handleInputChange = (e) => {
-    setName(e.target.value);
+    setCountry(e.target.value);
   };
 
   return (
     <>
-    <Header />
+    <HeaderLogin />
     <div className={styles.contenedor_central}>
         
       <div className={styles.input}>
       <input
         type="text"
-        value={name}
-        ref={inputRef}
+        value={country}
         onChange={handleInputChange}
-        placeholder="Escribe un jugador..."
+        ref={inputRef}
+        placeholder="Escribe un Pais..."
         style={{ padding: "10px", fontSize: "16px" }}/>
       </div>
 
@@ -72,9 +79,11 @@ const Search = () => {
       <img src="https://www.tenvinilo.com/vinilos-decorativos/img/preview/vinilo-infantil-pelota-futbol-color-1399.png" width="100" height="100" id={styles.pelota_cuatro}></img>
       <img src="https://www.tenvinilo.com/vinilos-decorativos/img/preview/vinilo-infantil-pelota-futbol-color-1399.png" width="100" height="100" id={styles.pelota_cinco}></img>
 
-      {loading && <p>Buscando jugador...</p>}
+      {loading && <p>Buscando Pais...</p>}
 
       {Players.length > 0 ? (
+        <div>
+        <VentanaPlayer player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
         <ul className={`${styles.cards_container} ${Players.length === 1 ? styles.centrar : ''}`}>
           {Players.map((item) => (
             <li key={item._id} className={styles.card}>
@@ -85,7 +94,7 @@ const Search = () => {
               </div>
 
               <div className={styles.segundo}>
-                <img src={item.playerImg} alt={item.name} className={styles.imagen_player} />
+                <img src={item.playerImg} alt={item.name} className={styles.imagen_player} onClick={() => setSelectedPlayer(item)}/>
                 <p className={styles.letra}>{item.name}</p>
                 <p>{item.Age}</p>
               </div>
@@ -105,15 +114,21 @@ const Search = () => {
                     <p>{item.weight}</p>
                   </div>
                 </div>
-                <button className={styles.favorite}  onClick={() => toggleFavorite(item._id)}>
+                <button 
+                  className={styles.favorite} onClick={() => toggleFavorite(item._id)}>
                   {favorites.includes(item._id) ? '⭐' : '☆'}
                 </button>
+                <button className={styles.boton_editar} onClick={() => navigate(`/editar/${item._id}`)}>Editar</button>
+
               </div>
+              
             </li>
           ))}
+
         </ul>
-      ) : !loading && name !== "" ? (
-        <p className={styles.mensaje}><strong>No se encontró el jugador "{name}"</strong></p> 
+        </div>
+      ) : !loading && country !== "" ? (
+        <p className={styles.mensaje}><strong>No se encontró los jugadores de "{country}"</strong></p> 
       ) : null}
       </div>
     </div>
@@ -121,4 +136,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Country_Login;

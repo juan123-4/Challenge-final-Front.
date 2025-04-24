@@ -1,15 +1,19 @@
 import React, { useState, useEffect,useRef } from "react";
-import Header from "../Header/Header";
 import { useFavoritos } from '../../Context/Favoritos/FavoritosContext';
-import styles from "./search.module.css";
+import styles from "./search_Login.module.css";
+import HeaderLogin from "../HeaderLogin/HeaderLogin";
+import VentanaPlayer from '../Ventana/Ventana';
+import { useNavigate } from "react-router-dom";
 
-const Search = () => {
+const Search_Login = () => {
 
   const { favorites, toggleFavorite } = useFavoritos();
   const [name, setName] = useState("");
   const [Players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
   const inputRef=useRef(null)
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const navigate=useNavigate()
 
   useEffect(() => {
       inputRef.current?.focus();
@@ -52,7 +56,8 @@ const Search = () => {
 
   return (
     <>
-    <Header />
+    <HeaderLogin />
+    <VentanaPlayer player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
     <div className={styles.contenedor_central}>
         
       <div className={styles.input}>
@@ -85,7 +90,7 @@ const Search = () => {
               </div>
 
               <div className={styles.segundo}>
-                <img src={item.playerImg} alt={item.name} className={styles.imagen_player} />
+                <img src={item.playerImg} alt={item.name} className={styles.imagen_player}  onClick={() => setSelectedPlayer(item)} />
                 <p className={styles.letra}>{item.name}</p>
                 <p>{item.Age}</p>
               </div>
@@ -108,6 +113,7 @@ const Search = () => {
                 <button className={styles.favorite}  onClick={() => toggleFavorite(item._id)}>
                   {favorites.includes(item._id) ? '⭐' : '☆'}
                 </button>
+                <button className={styles.boton_editar} onClick={() => navigate(`/editar/${item._id}`)}>Editar</button>
               </div>
             </li>
           ))}
@@ -121,4 +127,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Search_Login;

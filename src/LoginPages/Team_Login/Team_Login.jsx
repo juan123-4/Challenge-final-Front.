@@ -1,22 +1,27 @@
 import React, { useState, useEffect,useRef } from "react";
-import Header from "../Header/Header";
+import styles from "./Team_Login.module.css";
 import { useFavoritos } from '../../Context/Favoritos/FavoritosContext';
-import styles from "./search.module.css";
+import HeaderLogin from "../HeaderLogin/HeaderLogin";
+import VentanaPlayer from '../Ventana/Ventana';
+import { useNavigate } from "react-router-dom";
 
-const Search = () => {
 
+
+const Team_Login = () => {
   const { favorites, toggleFavorite } = useFavoritos();
-  const [name, setName] = useState("");
+  const [team, setTeam] = useState("");
   const [Players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
   const inputRef=useRef(null)
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const navigate=useNavigate()
 
   useEffect(() => {
-      inputRef.current?.focus();
-    }, []); 
-    
+        inputRef.current?.focus();
+      }, []); 
+
   useEffect(() => {
-    if (name.trim() === "") {
+    if (team.trim() === "") {
       setPlayers([]);
       return;
     }
@@ -26,12 +31,12 @@ const Search = () => {
     }, 500);
 
     return () => clearTimeout(delay);
-  }, [name]);
+  }, [team]);
 
   const buscarJugadores = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3009/player/${name}`);
+      const response = await fetch(`http://localhost:3009/player/team/${team}`);
       if (!response.ok) {
         setPlayers([]);
         setLoading(false);
@@ -40,28 +45,29 @@ const Search = () => {
       const data = await response.json();
       setPlayers(data);
     } catch (error) {
-      console.error("Error buscando jugador:", error);
+      console.error("Error buscando Equipo:", error);
       setPlayers([]);
     }
     setLoading(false);
   };
 
   const handleInputChange = (e) => {
-    setName(e.target.value);
+    setTeam(e.target.value);
   };
 
   return (
     <>
-    <Header />
+    <HeaderLogin />
+    <VentanaPlayer player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
     <div className={styles.contenedor_central}>
         
       <div className={styles.input}>
       <input
         type="text"
-        value={name}
+        value={team}
         ref={inputRef}
         onChange={handleInputChange}
-        placeholder="Escribe un jugador..."
+        placeholder="Escribe un Equipo de futbol..."
         style={{ padding: "10px", fontSize: "16px" }}/>
       </div>
 
@@ -72,7 +78,7 @@ const Search = () => {
       <img src="https://www.tenvinilo.com/vinilos-decorativos/img/preview/vinilo-infantil-pelota-futbol-color-1399.png" width="100" height="100" id={styles.pelota_cuatro}></img>
       <img src="https://www.tenvinilo.com/vinilos-decorativos/img/preview/vinilo-infantil-pelota-futbol-color-1399.png" width="100" height="100" id={styles.pelota_cinco}></img>
 
-      {loading && <p>Buscando jugador...</p>}
+      {loading && <p>Buscando Equipo...</p>}
 
       {Players.length > 0 ? (
         <ul className={`${styles.cards_container} ${Players.length === 1 ? styles.centrar : ''}`}>
@@ -85,7 +91,7 @@ const Search = () => {
               </div>
 
               <div className={styles.segundo}>
-                <img src={item.playerImg} alt={item.name} className={styles.imagen_player} />
+                <img src={item.playerImg} alt={item.name} className={styles.imagen_player} onClick={() => setSelectedPlayer(item)}/>
                 <p className={styles.letra}>{item.name}</p>
                 <p>{item.Age}</p>
               </div>
@@ -105,15 +111,16 @@ const Search = () => {
                     <p>{item.weight}</p>
                   </div>
                 </div>
-                <button className={styles.favorite}  onClick={() => toggleFavorite(item._id)}>
+                <button className={styles.favorite} onClick={() => toggleFavorite(item._id)}>
                   {favorites.includes(item._id) ? '⭐' : '☆'}
                 </button>
+                <button className={styles.boton_editar} onClick={() => navigate(`/editar/${item._id}`)}>Editar</button>
               </div>
             </li>
           ))}
         </ul>
-      ) : !loading && name !== "" ? (
-        <p className={styles.mensaje}><strong>No se encontró el jugador "{name}"</strong></p> 
+      ) : !loading && team !== "" ? (
+        <p className={styles.mensaje}><strong>No se encontró jugadores del "{team}"</strong></p> 
       ) : null}
       </div>
     </div>
@@ -121,4 +128,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Team_Login;

@@ -3,11 +3,29 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from './Home.jsx'
 import Search from "./components/search/Search.jsx";
 import Country from "./components/Country/Country.jsx";
-import "./App.css"
 import React from 'react';
 import Team from "./components/Team/Team.jsx";
-import Favoritos from "./components/Favoritos/Favoritos.jsx";
-import { FavoritosProvider } from './components/Favoritos/FavoritosContext.jsx';
+import Favoritos from "./Context/Favoritos/Favoritos.jsx";
+import { FavoritosProvider } from './Context/Favoritos/FavoritosContext.jsx';
+
+
+// Login
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.jsx";
+import { LogoutProvider } from "./Context/Logout/Logout.jsx";
+import Favoritos_Login from "./LoginPages/Favorites_Login/Favorite_Login.jsx";
+import EditarJugador from "./LoginPages/UpdatePlayer/UpdatePlayer.jsx";
+import CrearJugador from "./LoginPages/CreatePlayer/CreatePlayer.jsx"
+import Home_Login from "./LoginPages/Home_Login/Home_Login.jsx"; 
+import Login from "./Pages/Login/Login.jsx";
+import Register from "./Pages/Register/Register.jsx";
+import Country_Login from "./LoginPages/Country_Login/Country_Login.jsx";
+import Search_Login from "./LoginPages/Search_Login/Search_Login.jsx";
+import Team_Login from "./LoginPages/Team_Login/Team_Login.jsx";
+
+
+
+
+
 
 
 
@@ -32,6 +50,7 @@ import { FavoritosProvider } from './components/Favoritos/FavoritosContext.jsx';
 
 
     return (
+        <LogoutProvider>  
         <FavoritosProvider>
         <Router>
         <div>
@@ -41,10 +60,22 @@ import { FavoritosProvider } from './components/Favoritos/FavoritosContext.jsx';
             : 
             <Routes>
                 <Route path="/" element={<Home data={data}  />} />
-                <Route path="/player" element={<Search />} />
+                <Route path="/search" element={<Search />} />
                 <Route path="/country" element={<Country />} />
                 <Route path="/team" element={<Team />} />
                 <Route path="/favoritos" element={<Favoritos data={data} />} />
+                
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/home_login" element={ <ProtectedRoute> <Home_Login data={data} /> </ProtectedRoute>}/>
+                <Route path="/crear" element={ <ProtectedRoute> <CrearJugador /> </ProtectedRoute>}/>
+                <Route path="/favoritos_login" element={ <ProtectedRoute> <Favoritos_Login data={data} /> </ProtectedRoute>}/>
+                <Route path="/editar/:id" element={ <ProtectedRoute> <EditarJugador /> </ProtectedRoute>}/>
+                <Route path="/country_login" element={ <ProtectedRoute> <Country_Login /> </ProtectedRoute>}/>
+                <Route path="/search_login" element={ <ProtectedRoute> <Search_Login /> </ProtectedRoute>}/>
+                <Route path="/team_login" element={ <ProtectedRoute> <Team_Login /> </ProtectedRoute>}/>
+                
+
                 
             </Routes>
             }
@@ -52,6 +83,7 @@ import { FavoritosProvider } from './components/Favoritos/FavoritosContext.jsx';
         </div>
         </Router>
         </FavoritosProvider>
+        </LogoutProvider> 
     )
     };
 

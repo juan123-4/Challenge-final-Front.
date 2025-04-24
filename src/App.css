@@ -1,26 +1,20 @@
 img{
     width: 80px;
-    height: 80px;
-}
-
-/* //Home */
+    height: 80px;}
 
 .lista {
     display: flex;
     justify-content: center;
-   background-image: url("https://img.freepik.com/vector-gratis/fondo-futbol-degradado-dinamico_23-2149007789.jpg?semt=ais_hybrid&w=740");
+    background-image: url("https://img.freepik.com/vector-gratis/fondo-futbol-degradado-dinamico_23-2149007789.jpg?semt=ais_hybrid&w=740");}
   
-  }
-  
-  .cards-container {
+.cards-container {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 20px;
     list-style: none; 
-    padding: 0;
-  }
-  
-  .card {
+    padding: 0;}
+
+.card {
     background-image: url("https://img.freepik.com/vector-premium/fondo-deportivo-brillante-balones-futbol-colores-degradados-ilustracion-vectorial_619989-1332.jpg");
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 14px;
@@ -32,54 +26,55 @@ img{
     display: flex;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /*una transición suave */
-  }
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /*una transición suave */}
  
-  .card:hover {
+.card:hover {
     transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-  }
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);}
  
-  
-  .primera{
+.primera{
     margin: 0px;
     padding: 0px;
-    gap: 0px;
-  }
-  .tercera{
+    gap: 0px;}
+
+.tercera{
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
-    align-items: center;
-  }
-  .imagen_player{
+    align-items: center;}
+
+.centrar {
+    grid-template-columns: 1fr;
+    justify-items: center;}
+  
+.imagen_player{
     width: 200px;
-    height: 230px;
-  }
-  .imagen_country{
+    height: 230px;}
+
+.imagen_country{
     width: 70px;
-    height: 70px;
-  }
-  .imagen_altura{
+    height: 70px;}
+
+.imagen_altura{
     width: 30px;
-    height: 20px;
-  }
-  .imagen_peso{
+    height: 20px;}
+
+.imagen_peso{
     width: 30px;
-    height:20px;
-  }
+    height:20px;}
   
 .peso_altura-together{
     display: flex;
     flex-direction: row;
-    margin-top: 15px;
-    
-}
+    margin-top: 15px;}
+
+.favorite{
+    border-radius: 90px;}
+
 .altura{
-    margin-right: 10px;
-}
+    margin-right: 10px;}
+
 .letra{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 18px;
-}
+    font-size: 18px;}

@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom'
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from './components/Header/Header';
-import { useFavoritos } from './components/Favoritos/FavoritosContext';
+import { useFavoritos } from './Context/Favoritos/FavoritosContext';
+import "./App.css"
 
 
 const Home = ({data}) => {
@@ -9,15 +9,12 @@ const Home = ({data}) => {
     const { favorites, toggleFavorite } = useFavoritos();
   
   return (
-    
     <>
     <Header />
     <div className='lista'>
-    <ul className="cards-container">
+    <ul className={`cards-container ${data.length === 1 ? 'centrar' : ''}`}>
       {data.map(item => (
         <li key={item._id} className="card">
-         
-            
             <div className='primera'>
                 <p className='letra'>{item.team}</p>
                 <img src={item.teamImg} alt={item.team} />
@@ -49,7 +46,7 @@ const Home = ({data}) => {
          
              </div>
 
-                <button onClick={() => toggleFavorite(item._id)}>
+                <button className="favorite" onClick={() => toggleFavorite(item._id)}>
                   {favorites.includes(item._id) ? '⭐' : '☆'}
                 </button>
             </div>

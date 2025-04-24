@@ -12,6 +12,26 @@ body{
     min-height: 100vh;
     background-attachment: fixed; /* << esto hace que el fondo se quede fijo aunque scrollees */}
 
+.cards_container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    list-style: none; 
+    padding: 0;}
+
+.boton_editar{
+    background-image: url("https://wallpapers.com/images/hd/football-on-fire-1920-x-1080-hy25o3rtlhnaoj0z.jpg");
+    background-position:center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    border-radius: 90px;
+    margin-top: 10px;
+    color: white;}
+
+.favorite{
+    border-radius: 90px;
+    background-color: red;}
+
 .input{
     align-items: center;
     display: flex;
@@ -38,6 +58,10 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;}
+
+.centrar {
+    grid-template-columns: 1fr;
+    justify-items: center;}
 
 .card {
     background-image: url("https://img.freepik.com/vector-premium/fondo-deportivo-brillante-balones-futbol-colores-degradados-ilustracion-vectorial_619989-1332.jpg");
@@ -86,7 +110,7 @@ img{
     width: 30px;
     height:20px;}
   
-.peso_altura-together{
+.peso_altura_together{
     display: flex;
     flex-direction: row;
     margin-top: 15px;}
