@@ -37,6 +37,17 @@ img{
     padding: 0px;
     gap: 0px;}
 
+.cargando{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://us.123rf.com/450wm/alexmillos/alexmillos1412/alexmillos141200287/34882995-carga-f%C3%BAtbol-bar-de-dise%C3%B1o-ilustraci%C3%B3n-sobre-un-fondo-azul.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    z-index: 100;}
+
 .tercera{
     display: flex;
     flex-direction: column;

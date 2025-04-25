@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./CreatePlayer.module.css";
 import HeaderLogin from "../HeaderLogin/HeaderLogin";
+import { useNavigate } from "react-router-dom";
+
 
 const CrearJugador = () => {
   const [name, setName] = useState("");
@@ -16,6 +18,7 @@ const CrearJugador = () => {
   const [weight, setWeight] = useState("");
   const [WeightImg, setWeightImg] = useState("");
   const [descripcion,setDescripcion]=useState("")
+  const navigate=useNavigate()
   
 
   const handleSubmit = async (e) => {
@@ -24,7 +27,8 @@ const CrearJugador = () => {
     const nuevoJugador = { name,playerImg,position,Age,country,countryImg,team,teamImg,height,heightImg,weight,WeightImg,descripcion };
 
     try {
-      const res = await fetch("http://localhost:3009/create", {
+      const urlApi = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${urlApi}/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(nuevoJugador),
@@ -47,6 +51,8 @@ const CrearJugador = () => {
         setWeight("");
         setWeightImg("");
         setDescripcion("")
+        navigate("/home_login")
+
       } else {
         alert("Error: " + data.error);
       }

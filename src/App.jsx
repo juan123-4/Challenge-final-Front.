@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import "./App.css"
 import Home from './Home.jsx'
 import Search from "./components/search/Search.jsx";
 import Country from "./components/Country/Country.jsx";
@@ -22,14 +23,7 @@ import Country_Login from "./LoginPages/Country_Login/Country_Login.jsx";
 import Search_Login from "./LoginPages/Search_Login/Search_Login.jsx";
 import Team_Login from "./LoginPages/Team_Login/Team_Login.jsx";
 
-
-
-
-
-
-
-
-    const App = () => {
+const App = () => {
     const [data, setData] = useState(null)
     const urlApi = import.meta.env.VITE_API_URL;
 
@@ -56,7 +50,7 @@ import Team_Login from "./LoginPages/Team_Login/Team_Login.jsx";
         <div>
             
             {data === null 
-            ? (<div>cargando...</div>) 
+            ? (<div className="cargando">cargando...</div>) 
             : 
             <Routes>
                 <Route path="/" element={<Home data={data}  />} />

@@ -30,7 +30,8 @@ const Team = () => {
   const buscarJugadores = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3009/player/team/${team}`);
+      const urlApi = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${urlApi}/player/team/${team}`);
       if (!response.ok) {
         setPlayers([]);
         setLoading(false);

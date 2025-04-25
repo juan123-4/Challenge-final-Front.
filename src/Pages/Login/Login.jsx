@@ -17,7 +17,8 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const idToken = await userCredential.user.getIdToken();
 
-     await fetch("http://localhost:3009/login", {
+      const urlApi = import.meta.env.VITE_API_URL; //Tampoco funciono en el login
+      await fetch("http://localhost:3009/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

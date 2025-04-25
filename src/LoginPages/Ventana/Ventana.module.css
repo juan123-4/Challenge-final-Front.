@@ -24,7 +24,10 @@
     position: relative;
     box-shadow: 0 0 10px black;
     animation: scaleUp 0.3s ease;
-    transform-origin: center;}
+    transform-origin: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;}
   
 .close_button {
     position: absolute;

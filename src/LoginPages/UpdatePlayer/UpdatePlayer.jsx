@@ -24,7 +24,8 @@ const EditarJugador = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3009/id/${id}`, {
+    const urlApi = import.meta.env.VITE_API_URL;
+    fetch(`${urlApi}/id/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(jugador),

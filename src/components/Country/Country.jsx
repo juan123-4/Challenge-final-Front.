@@ -34,7 +34,8 @@ const Country = () => {
   const buscarJugadores = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3009/player/country/${country}`);
+      const urlApi = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${urlApi}/player/country/${country}`);  
       if (!response.ok) {
         setPlayers([]);
         setLoading(false);
