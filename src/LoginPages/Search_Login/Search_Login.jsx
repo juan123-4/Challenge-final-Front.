@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useRef } from "react";
 import { useFavoritos } from '../../Context/Favoritos/FavoritosContext';
-import styles from "./search_Login.module.css";
+import styles from "./Search_Login.module.css";
 import HeaderLogin from "../HeaderLogin/HeaderLogin";
 import VentanaPlayer from '../Ventana/Ventana';
 import { useNavigate } from "react-router-dom";
