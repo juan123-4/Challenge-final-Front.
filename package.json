@@ -2,12 +2,12 @@
   "name": "challenge-front",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "dev": "vite"
-  },
+ "scripts": {
+     "dev": "vite",
+     "build": "vite build",
+     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+     "preview": "vite preview"
+ },
   "keywords": [],
   "author": "",
   "license": "ISC",
